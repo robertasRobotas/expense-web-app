@@ -1,0 +1,13 @@
+.wrapper {
+  height: 100px;
+  background-color: #553772;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.logo {
+  color: white;
+}
