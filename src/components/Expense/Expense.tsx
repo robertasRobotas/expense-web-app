@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./styles.module.css";
+import Link from "next/link";
 
 type ExpenseType = {
   _id: string;
@@ -17,12 +18,19 @@ type ExpenseComponentType = {
 
 const Expense: React.FC<ExpenseComponentType> = ({ expense }) => {
   return (
-    <div className={styles.wrapper}>
-      <div>{expense.title}</div>
-      <div>{expense.amount}</div>
-      <div>{expense.type}</div>
-      <img className={styles.photo} src={expense.photo_url} />
-    </div>
+    <Link className={styles.link} href={`/expense/${expense._id}`}>
+      <div className={styles.wrapper}>
+        <img className={styles.photo} src={expense.photo_url} />
+        <div className={styles.cardTextContents}>
+          <div>{expense.title}</div>
+          <div className={styles.amount}>
+            {expense.amount}
+            <span className={styles.eurSign}>€</span>
+          </div>
+          <div className={styles.type}>{expense.type}</div>
+        </div>
+      </div>
+    </Link>
   );
 };
 

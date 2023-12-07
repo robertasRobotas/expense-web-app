@@ -1,0 +1,33 @@
+.photo {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.expense {
+  width: 80%;
+  margin: auto;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.title {
+  font-size: 1.6rem;
+  margin: 0;
+  font-weight: 400;
+}
+
+.amount {
+  font-size: 1.8rem;
+}
+
+.type {
+  font-size: 0.8rem;
+}
+
+.description {
+  margin: 0;
+}

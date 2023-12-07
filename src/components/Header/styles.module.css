@@ -11,3 +11,12 @@
 .logo {
   color: white;
 }
+
+.navbar {
+  list-style: none;
+}
+
+.link {
+  text-decoration: none;
+  color: white;
+}
