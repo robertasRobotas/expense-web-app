@@ -4,8 +4,12 @@ import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import axios from "axios";
 import { useRouter } from "next/router";
+import Button from "@/components/Button/Button";
+import cookie from "js-cookie";
 
 const AddExpense = () => {
+  const [isLoading, setLoading] = useState(false);
+
   const [title, setTitle] = useState("");
   const [type, setType] = useState("");
   const [amount, setAmount] = useState<number>();
@@ -15,7 +19,11 @@ const AddExpense = () => {
   const router = useRouter();
 
   const onAddExpense = async () => {
-    const expense = {
+    // validacija
+
+    setLoading(true);
+
+    const body = {
       title: title,
       type: type,
       amount: amount,
@@ -23,11 +31,17 @@ const AddExpense = () => {
       photo_url: photo,
     };
 
-    const response = await axios.post("http://localhost:3001/expenses", {
-      ...expense,
+    const headers = {
+      authorization: cookie.get("jwt_token"),
+    };
+
+    const response = await axios.post("http://localhost:3001/expenses", body, {
+      headers,
     });
 
-    if (response.status === 200) {
+    setLoading(false);
+
+    if (response.status === 201) {
       router.push("/");
     }
   };
@@ -74,7 +88,7 @@ const AddExpense = () => {
             placeholder="photo"
           />
 
-          <button onClick={onAddExpense}>Add Expense</button>
+          <Button onAddExpense={onAddExpense} isLoading={isLoading} />
         </div>
       </div>
       <Footer />
