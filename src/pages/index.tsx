@@ -1,23 +1,31 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import cookie from "js-cookie";
+import { useRouter } from "next/router";
 
-import Footer from "@/components/Footer/Footer";
-import Header from "@/components/Header/Header";
 import Expenses from "@/components/Expenses/Expenses";
+import PageTemplate from "@/components/PageTemplate/PageTemplate";
 
 export default function Home() {
+  const router = useRouter();
+
   const [expenses, setExpenses] = useState<Array<any> | null>(null);
 
   const fetchExpenses = async () => {
-    const headers = {
-      authorization: cookie.get("jwt_token"),
-    };
+    try {
+      const headers = {
+        authorization: cookie.get("jwt_token"),
+      };
 
-    const response = await axios.get("http://localhost:3001/expenses", {
-      headers,
-    });
-    setExpenses(response.data.expenses);
+      const response = await axios.get("http://localhost:3001/expenses", {
+        headers,
+      });
+      setExpenses(response.data.expenses);
+    } catch (err) {
+      if (err.response.status === 401) {
+        router.push("/login");
+      }
+    }
   };
 
   useEffect(() => {
@@ -26,9 +34,9 @@ export default function Home() {
 
   return (
     <>
-      <Header />
-      <Expenses expenses={expenses} />
-      <Footer />
+      <PageTemplate>
+        <Expenses expenses={expenses} />
+      </PageTemplate>
     </>
   );
 }

@@ -6,6 +6,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import Button from "@/components/Button/Button";
 import cookie from "js-cookie";
+import PageTemplate from "@/components/PageTemplate/PageTemplate";
 
 const AddExpense = () => {
   const [isLoading, setLoading] = useState(false);
@@ -19,36 +20,52 @@ const AddExpense = () => {
   const router = useRouter();
 
   const onAddExpense = async () => {
-    // validacija
+    try {
+      const textPattern = /.{5,}/;
 
-    setLoading(true);
+      if (!textPattern.test(title)) {
+        return;
+      }
 
-    const body = {
-      title: title,
-      type: type,
-      amount: amount,
-      description: description,
-      photo_url: photo,
-    };
+      console.log("hitttt");
+      setLoading(true);
 
-    const headers = {
-      authorization: cookie.get("jwt_token"),
-    };
+      const body = {
+        title: title,
+        type: type,
+        amount: amount,
+        description: description,
+        photo_url: photo,
+      };
 
-    const response = await axios.post("http://localhost:3001/expenses", body, {
-      headers,
-    });
+      const headers = {
+        authorization: cookie.get("jwt_token"),
+      };
 
-    setLoading(false);
+      console.log("hitttt2");
 
-    if (response.status === 201) {
-      router.push("/");
+      const response = await axios.post(
+        "http://localhost:3001/expenses",
+        body,
+        {
+          headers,
+        }
+      );
+
+      console.log("hitttt3");
+      setLoading(false);
+
+      if (response.status === 201) {
+        router.push("/");
+      }
+    } catch (err) {
+      console.log(err);
+      setLoading(false);
     }
   };
 
   return (
-    <div>
-      <Header />
+    <PageTemplate>
       <div className={styles.formWrapper}>
         <h1 className={styles.title}>Add Expense</h1>
 
@@ -88,11 +105,14 @@ const AddExpense = () => {
             placeholder="photo"
           />
 
-          <Button onAddExpense={onAddExpense} isLoading={isLoading} />
+          <Button
+            text="Add Expense"
+            onClick={onAddExpense}
+            isLoading={isLoading}
+          />
         </div>
       </div>
-      <Footer />
-    </div>
+    </PageTemplate>
   );
 };
 

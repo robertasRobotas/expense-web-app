@@ -4,8 +4,7 @@ import cookie from "js-cookie";
 import { useRouter } from "next/router";
 
 import styles from "./styles.module.css";
-import Header from "@/components/Header/Header";
-import Footer from "@/components/Footer/Footer";
+import PageTemplate from "@/components/PageTemplate/PageTemplate";
 
 const Login = () => {
   const router = useRouter();
@@ -33,8 +32,7 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <Header />
+    <PageTemplate>
       <div className={styles.form}>
         <input
           placeholder="email"
@@ -49,8 +47,7 @@ const Login = () => {
         />
         <button onClick={onLogin}>Login</button>
       </div>
-      <Footer />
-    </div>
+    </PageTemplate>
   );
 };
 

@@ -1,14 +1,15 @@
 import React from "react";
 
 type ButtonType = {
-  onAddExpense: () => void;
+  onClick: () => void;
   isLoading: boolean;
+  text: string;
 };
 
-const Button: React.FC<ButtonType> = ({ onAddExpense, isLoading }) => {
+const Button: React.FC<ButtonType> = ({ onClick, isLoading, text }) => {
   return (
-    <button onClick={onAddExpense}>
-      {!isLoading ? <>Add Expense</> : <>Loading...</>}
+    <button onClick={onClick}>
+      {!isLoading ? <>{text}</> : <>Loading...</>}
     </button>
   );
 };
