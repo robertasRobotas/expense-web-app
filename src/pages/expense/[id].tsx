@@ -29,9 +29,12 @@ const Expense = () => {
       authorization: cookie.get("jwt_token"),
     };
 
-    const expense = await axios.get(`http://localhost:3001/expenses/${id}`, {
-      headers,
-    });
+    const expense = await axios.get(
+      `${process.env.SERVER_URL}/expenses/${id}`,
+      {
+        headers,
+      }
+    );
     setExpense(expense.data.expense);
   };
 
@@ -45,7 +48,7 @@ const Expense = () => {
     };
 
     const response = await axios.delete(
-      `http://localhost:3001/expenses/${router.query.id}`,
+      `${process.env.SERVER_URL}/expenses/${router.query.id}`,
       {
         headers,
       }

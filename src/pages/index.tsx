@@ -17,7 +17,7 @@ export default function Home() {
         authorization: cookie.get("jwt_token"),
       };
 
-      const response = await axios.get("http://localhost:3001/expenses", {
+      const response = await axios.get(`${process.env.SERVER_URL}/expenses`, {
         headers,
       });
       setExpenses(response.data.expenses);

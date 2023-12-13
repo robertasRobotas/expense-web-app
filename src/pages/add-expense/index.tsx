@@ -45,7 +45,7 @@ const AddExpense = () => {
       console.log("hitttt2");
 
       const response = await axios.post(
-        "http://localhost:3001/expenses",
+        `${process.env.SERVER_URL}/expenses`,
         body,
         {
           headers,
