@@ -22,6 +22,7 @@ export default function Home() {
       });
       setExpenses(response.data.expenses);
     } catch (err) {
+      // @ts-ignore
       if (err.response.status === 401) {
         router.push("/login");
       }

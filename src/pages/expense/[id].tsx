@@ -71,6 +71,7 @@ const Expense = () => {
             <img className={styles.photo} src={expense.photo_url} />
 
             <Button
+              className={styles.deleteButton}
               text="Delete Expense"
               onClick={() => setShowConfirmModal(true)}
               isLoading={false}

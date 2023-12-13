@@ -25,7 +25,9 @@ const Header = () => {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.logo}>Expense App</div>
+      <Link className={styles.link} href="/">
+        <div className={styles.logo}>Expense App</div>
+      </Link>
 
       {/* Atskiras nav komponentas */}
       <nav className={styles.navbar}>
