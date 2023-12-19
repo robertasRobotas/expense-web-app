@@ -7,6 +7,7 @@ import styles from "./styles.module.css";
 import PageTemplate from "@/components/PageTemplate/PageTemplate";
 import Button from "@/components/Button/Button";
 import Modal from "@/components/Modal/Modal";
+import { selectPhotoByType } from "@/components/Expense/helpers/expense";
 
 type ExpenseType = {
   _id: string;
@@ -21,6 +22,8 @@ type ExpenseType = {
 const Expense = () => {
   const [expense, setExpense] = useState<ExpenseType | null>(null);
   const [isShowConfirmModal, setShowConfirmModal] = useState(false);
+
+  let expensePhoto = expense && selectPhotoByType(expense.type);
 
   const router = useRouter();
 
@@ -71,7 +74,7 @@ const Expense = () => {
             <div className={styles.amount}>{expense.amount}$</div>
             <p className={styles.description}>{expense.description}</p>
             <div className={styles.type}>{expense.type}</div>
-            <img className={styles.photo} src={expense.photo_url} />
+            <img className={styles.photo} src={expensePhoto.src} />
 
             <Button
               className={styles.deleteButton}

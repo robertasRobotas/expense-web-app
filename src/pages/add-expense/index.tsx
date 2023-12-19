@@ -15,19 +15,17 @@ const AddExpense = () => {
   const [type, setType] = useState("");
   const [amount, setAmount] = useState<number>();
   const [description, setDescription] = useState("");
-  const [photo, setPhoto] = useState("");
 
   const router = useRouter();
 
   const onAddExpense = async () => {
     try {
-      const textPattern = /.{5,}/;
+      // const textPattern = /.{5,}/;
 
-      if (!textPattern.test(title)) {
-        return;
-      }
+      // if (!textPattern.test(title)) {
+      //   return;
+      // }
 
-      console.log("hitttt");
       setLoading(true);
 
       const body = {
@@ -35,14 +33,13 @@ const AddExpense = () => {
         type: type,
         amount: amount,
         description: description,
-        photo_url: photo,
       };
+
+      console.log(body);
 
       const headers = {
         authorization: cookie.get("jwt_token"),
       };
-
-      console.log("hitttt2");
 
       const response = await axios.post(
         `${process.env.SERVER_URL}/expenses`,
@@ -52,7 +49,6 @@ const AddExpense = () => {
         }
       );
 
-      console.log("hitttt3");
       setLoading(false);
 
       if (response.status === 201) {
@@ -76,21 +72,32 @@ const AddExpense = () => {
             placeholder="title"
           />
 
-          <input
+          <select
+            id="select-input"
             value={type}
             onChange={(e) => setType(e.target.value)}
-            placeholder="type"
-          />
+          >
+            <option value="">Select type</option>
+            <option value="housing">Housing</option>
+            <option value="transportation">Transportation</option>
+            <option value="groceries">Food and Groceries</option>
+            <option value="leisure">Leisure</option>
+            <option value="health">Health</option>
+            <option value="services">Services & Subscriptions</option>
+            <option value="investment">Investment</option>
+          </select>
 
           <input
-            value={amount}
+            value={amount || ""}
             type="number"
             onChange={(e) => {
+              console.log(e.target.value);
+
               const number = Number(e.target.value);
 
               setAmount(number);
             }}
-            placeholder="amount"
+            placeholder="amount (12,56)"
           />
 
           <input
@@ -99,14 +106,9 @@ const AddExpense = () => {
             placeholder="description"
           />
 
-          <input
-            value={photo}
-            onChange={(e) => setPhoto(e.target.value)}
-            placeholder="photo"
-          />
-
           <Button
-            text="Add Expense"
+            className={styles.button}
+            text="Add"
             onClick={onAddExpense}
             isLoading={isLoading}
           />

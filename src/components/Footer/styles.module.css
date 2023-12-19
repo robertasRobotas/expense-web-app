@@ -1,4 +1,4 @@
 .wrapper {
   height: 80px;
-  background-color: #553772;
+  background-color: var(--main-bg-color);
 }

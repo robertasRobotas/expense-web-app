@@ -16,9 +16,20 @@
 
 .title {
   text-align: center;
+  font-size: 1.2rem;
+  font-weight: 500;
 }
 
 .formWrapper {
   margin-top: 2rem;
   margin-bottom: 2rem;
+}
+
+.button {
+  background-color: #faeed1;
+  padding: 0.5rem;
+  font-weight: 500;
+  border: 1px rgb(206, 206, 206) solid;
+  border-radius: 4px;
+  cursor: pointer;
 }

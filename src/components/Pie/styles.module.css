@@ -1,0 +1,11 @@
+.pieWrapper {
+  width: 500px;
+  margin: auto;
+  margin-bottom: 2rem;
+}
+
+@media only screen and (max-width: 768px) {
+  .pieWrapper {
+    width: 360px;
+  }
+}

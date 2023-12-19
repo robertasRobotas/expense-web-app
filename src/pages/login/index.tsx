@@ -18,17 +18,21 @@ const Login = () => {
       password: password,
     };
 
-    const response = await axios.post(
-      `${process.env.SERVER_URL}/users/login`,
-      body
-    );
+    try {
+      const response = await axios.post(
+        `${process.env.SERVER_URL}/users/login`,
+        body
+      );
 
-    if (response.status === 200) {
-      cookie.set("jwt_token", response.data.token);
-      router.push("/");
+      if (response.status === 200) {
+        cookie.set("jwt_token", response.data.token);
+        router.push("/");
+      }
+    } catch (err) {
+      if (err.response.status === 401) {
+        console.log("BAD CREDENTIALS");
+      }
     }
-
-    console.log("response", response);
   };
 
   return (

@@ -5,3 +5,8 @@
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
+
+.statisticsTitle {
+  margin: auto;
+  color: var(--text-color);
+}

@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: false,
   env: {
-    SERVER_URL: "https://expenses-api-tk6s.onrender.com",
+    SERVER_URL: "http://localhost:3001",
   },
 };
 

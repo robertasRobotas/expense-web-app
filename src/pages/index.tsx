@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 
 import Expenses from "@/components/Expenses/Expenses";
 import PageTemplate from "@/components/PageTemplate/PageTemplate";
+import Link from "next/link";
 
 export default function Home() {
   const router = useRouter();
